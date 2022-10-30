@@ -4,25 +4,32 @@
 
     Angular is a Javascript Framework which allows you to create reactive **Single-Page-Applications(SPAs)**.
 
-- Key points to learn
+### Key points to learn
 
-  - Getting Started
-  - The Basics
-  - Components & Databindings
-  - Directives
-  - Services & Dependency Injection
-  - Routing
-  - Observables
-  - Forms
-  - Pipes
-  - Http
-  - Authentications
-  - Optimizations & NgModules
-  - Deployment
-  - Animations & Testing
-  - Project
+| No. | Topic |
+|-----|-------|
+|1|  [The Basics](#how-angular-project-starts)|
+|2|  [Typescript](#typescript)|
+|3|  [Bootstrap](#adding-bootstrap)|
+|4|  [Component](#component)|
+|5|  [Data Binding](#data-binding)|
+|6|  [Directives](#directives)|
+|7|  [Lifecycle Hooks](#lifecycle-hooks)|
+|8|  [Services](#services)|
+|9|  [Routing](#routing)|
+|10| [Observables](#observables)|
+|11| [Forms](#forms)|
+|12| [Pipes](#pipes)|
+|13| [HTTP](#http)|
+|14| [Authentication](#authentication)|
+|15| [Dynamic Components](#dynamic-components)|
+|16| [Modules & Optimizations](#modules--optimizations)|
+|17| [Deployment](#deployment)|
+|18| [NgRx](#ngrx)|
+|19| [Animations & Testing](#animations--testing)|
+|20| [Project](#project)|
 
-- How Angular Project Starts
+#### How Angular Project Starts
   
   - First the CLI loads the **main.ts** file when running the command `ng serve`
   - AppModule [./app/app.module] is passed as a parameter in the main.ts file under bootstrapModule function.
@@ -30,32 +37,32 @@
   `bootstrap: [AppComponent]` as argument to the `NgModule` decorator.
   - It means AppComponent should be known to Angular when it analyse the project.
 
-- Typescript
+#### Typescript
 
-    - Typescript is a superset of javascript
-    - More features than vanilla JS (e.g Types, Classes, Interfaces, etc)
-    - Typescript compiled to Javascript and run in browser
+  - Typescript is a superset of javascript
+  - More features than vanilla JS (e.g Types, Classes, Interfaces, etc)
+  - Typescript compiled to Javascript and run in browser
 
-- Adding Bootstrap
+#### Adding Bootstrap
 
-    > ng add @ng-bootstrap/ng-bootstrap
+  > ng add @ng-bootstrap/ng-bootstrap
 
-    alternate
+  alternate
 
-    > npm install bootstrap jquery
+  > npm install bootstrap jquery
 
-    ```json > angular.json
-      "styles": [
-        "node_modules/bootstrap/dist/css/bootstrap.min.css",
-        "src/styles.css"
-      ],
-      "scripts": [
-        "node_modules/jquery/dist/jquery.min.js",
-        "node_modules/bootstrap/dist/js/bootstrap.min.js"
-      ]
-    ```
+  ```json > angular.json
+    "styles": [
+      "node_modules/bootstrap/dist/css/bootstrap.min.css",
+      "src/styles.css"
+    ],
+    "scripts": [
+      "node_modules/jquery/dist/jquery.min.js",
+      "node_modules/bootstrap/dist/js/bootstrap.min.js"
+    ]
+  ```
 
-- Component
+#### Component
 
   - Components are the key feature of Angular
   - When creating an application we need different blocks like header, users, sidebar etc.
@@ -68,7 +75,7 @@
   - styleUrls for refer external style sheet it takes an array of different style urls. We can use inline style using styles array.
   ex : `styles: [ h3 { color : dodgerblue } ]`
 
-- Data Binding
+#### Data Binding
 
   - Communication between view (HTML) and logic (TS).
   - String Interpolation (`{{ data }}`)
@@ -76,7 +83,7 @@
   - Event Binding (`(event) = "expression"`)
   - Two-Way-Binding (`[(ngModel)] = "data"`)
   
-- Directives
+#### Directives
 
   - Directives are the Instructions in the DOM
     1. Structural Directive
@@ -125,7 +132,7 @@
     ```
     Refer `HighlightDirective`
 
-- Lifecycle Hooks
+#### Lifecycle Hooks
  
   | Hooks  | Description  |
   |---|---|
@@ -137,7 +144,7 @@
   | `ngAfterViewChecked`  | Called every time the view (and child views) have been checked  |
   | `ngOnDestroy` | Called once the component is about to be destroyed |
 
-- Services
+#### Services
 
   - Service acts as central repository or central business unit.
   - No need to instanciate the class, it will auto instanciate by angular internally this process is called **Dependency Injection**.
@@ -166,7 +173,7 @@
     // if we done this without using services, have to set emitter then bind property send value listen event alot of things to do, so use service to communicate ... 
     ```
 
-- Routing
+#### Routing
 
   - If selected routing option when creating project then open `app-routing.module.ts`
 
@@ -385,7 +392,7 @@
     "localhost:4200/#/user/10?mode=edit#focus"
     ``` 
 
-- Observables
+#### Observables
 
   - An Observables can be called as data source. 
   - Various data sources like User input events, Http Requests, Triggred in code etc.
@@ -485,7 +492,7 @@
       }
     ```
 
-- Forms
+#### Forms
 
   1. `Template-Driven` - Angular infers the Form Object from the DOM
   2. `Reactive` - Created programmatically and synchronized with the DOM
@@ -602,7 +609,7 @@
       </form>
     ```
 
-- Pipes
+#### Pipes
 
   - Pipes helps to transforms output in the template.
     ```html
@@ -649,7 +656,7 @@
       <p>{{ getStatus() | async }}</p>
     ```
 
-- HTTP
+#### HTTP
 
   - Communicate with backend and web apis
 
@@ -856,7 +863,7 @@
         // here first AuthInterceptorService will work after that LoggingInterceptorService will work
         ```
 
-- Authentication
+#### Authentication
 
   - Signup and Login with auth key
   - How authentication works
@@ -912,7 +919,7 @@
     }
     ```
   
-- Dynamic Components
+#### Dynamic Components
 
   - Load components programmatically
     - *ngIf
@@ -935,7 +942,7 @@
         ...
       ```
 
-- Modules & Optimizations
+#### Modules & Optimizations
 
   - Angular analyzes NgModules to "understand" your application and its features.
   
@@ -976,7 +983,7 @@
     ...
     ```
   
-- Deployment
+#### Deployment
 
   - Use & check environment variables
       ```ts
@@ -994,6 +1001,11 @@
   - `firebase deploy`
   - Hosting URL: [Recipe Book](https://angular-86654.web.app)
 
+#### NgRx
+#### Animations & Testing
+
 ---
 ### Project
   ![image](./src/assets/planning.png)
+
+**[⬆ Back to Top](#key-points-to-learn)**
