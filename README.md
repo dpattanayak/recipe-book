@@ -1010,7 +1010,7 @@
 
 **[⬆ Back to Top](#key-points-to-learn)**
 
-<style>
+<!-- <style>
   table:nth-of-type(1) {
     display:table !important;
     width:100% !important;
@@ -1018,4 +1018,4 @@
   table:nth-of-type(1) th:nth-of-type(2) {
     width:95% !important;
   }
-</style>
+</style> -->
