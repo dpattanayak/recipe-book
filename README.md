@@ -1009,3 +1009,13 @@
   ![image](./src/assets/planning.png)
 
 **[⬆ Back to Top](#key-points-to-learn)**
+
+<style>
+  table:nth-of-type(1) {
+    display:table;
+    width:100%;
+  }
+  table:nth-of-type(1) th:nth-of-type(2) {
+    width:95%;
+  }
+</style>
