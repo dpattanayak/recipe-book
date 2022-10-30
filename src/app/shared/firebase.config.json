@@ -1,0 +1,5 @@
+{
+    "API_KEY":"AIzaSyBBZcvLoQTX4gzdnvGmpU3mDeco3ZDbcxM",
+    "SIGNUP_URL":"https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=",
+    "SIGNIN_URL":"https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key="
+}
