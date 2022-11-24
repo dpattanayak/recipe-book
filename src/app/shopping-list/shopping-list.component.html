@@ -2,9 +2,19 @@
   <div class="col-md-10">
     <app-shopping-edit></app-shopping-edit>
     <hr />
-    <ul class="list-group" *ngIf="ingredients.length; else addIngredient">
-      <a class="list-group-item" style="cursor: pointer" *ngFor="let ingredient of ingredients; let i = index"
-        (click)="onEditItem(i)">
+    <ul
+      class="list-group"
+      *ngIf="(ingredients | async).ingredients.length; else addIngredient"
+    >
+      <a
+        class="list-group-item"
+        style="cursor: pointer"
+        *ngFor="
+          let ingredient of (ingredients | async).ingredients;
+          let i = index
+        "
+        (click)="onEditItem(i)"
+      >
         {{ ingredient.name }} ({{ ingredient.amount }})
       </a>
     </ul>

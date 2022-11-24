@@ -1002,6 +1002,31 @@
   - Hosting URL: [Recipe Book](https://angular-86654.web.app)
 
 #### NgRx
+
+  - In a typical angular application we need to store varius data like user login details, product details etc but when application refresh data will be gone to prevent that we need a database. To manage the data within the application before sending to database and after fetching from database is called **State Management**.
+
+  ![image](./src/assets/ngrx.png)
+
+  - In Angular we have RxJS for state management but there is some issues.
+    - State can be updated anywhare
+    - State is possible mutable
+    - Handling side effects (e.g. Http calls) is unclear
+    - No specific pattern is enforced
+  
+  -  Redux to the Rescue
+    - One central Store (Application State)
+    - Services, Components receive state from the central state
+  
+  ![image](./src/assets/redux.png)
+
+  - NgRx is a Angulars implementation of Redux
+
+  ![image](./src/assets/ng%2Bredux%3Dngrx.png)
+
+  - Install NgRX
+    - `ng add @ngrx/store@latest`
+
+
 #### Animations & Testing
 
 ---
@@ -1010,7 +1035,8 @@
 
 **[⬆ Back to Top](#key-points-to-learn)**
 
-<!-- <style>
+<!-- 
+<style>
   table:nth-of-type(1) {
     display:table !important;
     width:100% !important;
@@ -1018,4 +1044,5 @@
   table:nth-of-type(1) th:nth-of-type(2) {
     width:95% !important;
   }
-</style> -->
+</style> 
+-->
