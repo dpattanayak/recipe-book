@@ -38,7 +38,7 @@ export class StopEdit implements Action {
   constructor(public payload: null) {}
 }
 
-export type ShoppingListActions =
+export type shoppingListActions =
   | AddIngredient
   | AddIngredients
   | UpdateIngredient

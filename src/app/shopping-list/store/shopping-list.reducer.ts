@@ -12,14 +12,14 @@ export interface AppState {
 }
 
 const initialState: State = {
-  ingredients: [new Ingredient('Egg', 12)],
+  ingredients: [], // [new Ingredient('Egg', 12)]
   editedIngredient: null,
   editedIngredientIndex: -1,
 };
 
 export function shoppingListReducer(
   state: State = initialState,
-  action: SLActions.ShoppingListActions
+  action: SLActions.shoppingListActions
 ) {
   switch (action.type) {
     case SLActions.ADD_INGREDIENT:
@@ -38,7 +38,7 @@ export function shoppingListReducer(
       const ingredient = state.ingredients[state.editedIngredientIndex];
       const updatedIngredient = {
         ...ingredient,
-        ...action.payload['ingredient'],
+        ...(<Ingredient>action.payload),
       };
       const updatedIngredients = [...state.ingredients];
       updatedIngredients[state.editedIngredientIndex] = updatedIngredient;
@@ -46,8 +46,8 @@ export function shoppingListReducer(
       return {
         ...state,
         ingredients: updatedIngredients,
-        editedIngredientIndex: -1,
         editedIngredient: null,
+        editedIngredientIndex: -1,
       };
 
     case SLActions.DELETE_INGREDIENT:
@@ -56,8 +56,8 @@ export function shoppingListReducer(
         ingredients: state.ingredients.filter((ingredient, index) => {
           return index !== state.editedIngredientIndex;
         }),
-        editedIngredientIndex: -1,
         editedIngredient: null,
+        editedIngredientIndex: -1,
       };
 
     case SLActions.START_EDIT:
