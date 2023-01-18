@@ -7,10 +7,6 @@ export interface State {
   editedIngredientIndex: number;
 }
 
-export interface AppState {
-  shoppingList: State;
-}
-
 const initialState: State = {
   ingredients: [], // [new Ingredient('Egg', 12)]
   editedIngredient: null,
@@ -25,7 +21,7 @@ export function shoppingListReducer(
     case SLActions.ADD_INGREDIENT:
       return {
         ...state,
-        ingredients: [...state.ingredients, action.payload],
+        ingredients: [...state.ingredients, <Ingredient>action.payload],
       };
 
     case SLActions.ADD_INGREDIENTS:
@@ -63,7 +59,7 @@ export function shoppingListReducer(
     case SLActions.START_EDIT:
       return {
         ...state,
-        editedIngredientIndex: action.payload,
+        editedIngredientIndex: <number>action.payload,
         editedIngredient: { ...state.ingredients[<number>action.payload] },
       };
 
