@@ -1,10 +1,27 @@
 import { Action } from '@ngrx/store';
 
-export const LOGIN = '[Auth] Login';
-export const LOGOUT = '[Auth] Logout';
+export enum ACTIONS {
+  LOGIN_START = '[Auth] Login Start',
+  AUTHENTICATE_SUCCESS = '[Auth] Login Success',
+  AUTHENTICATE_FAIL = '[Auth] Login Fail',
+  SIGNUP_START = '[Auth] Signup Start',
+  CLEAR_ERROR = '[Auth] Clear Error',
+  AUTO_LOGIN = '[Auth] Auto Login',
+  LOGOUT = '[Auth] Logout',
+}
 
-export class Login implements Action {
-  readonly type: string = LOGIN;
+export class LoginStart implements Action {
+  readonly type: string = ACTIONS.LOGIN_START;
+  constructor(public payload: { email: string; password: string }) {}
+}
+
+export class AuthenticateSuccess implements Action {
+  readonly type: string = ACTIONS.AUTHENTICATE_SUCCESS;
+
+  email: string;
+  userId: string;
+  token: string;
+  expirationDate: Date;
 
   constructor(
     public payload: {
@@ -16,9 +33,36 @@ export class Login implements Action {
   ) {}
 }
 
-export class Logout implements Action {
-  readonly type: string = LOGOUT;
+export class AuthenticateFail implements Action {
+  readonly type: string = ACTIONS.AUTHENTICATE_FAIL;
+  constructor(public payload: string) {}
+}
+
+export class SignupStart implements Action {
+  readonly type: string = ACTIONS.SIGNUP_START;
+  constructor(public payload: { email: string; password: string }) {}
+}
+
+export class ClearError implements Action {
+  readonly type: string = ACTIONS.CLEAR_ERROR;
   constructor(public payload: null) {}
 }
 
-export type AuthActions = Login | Logout;
+export class Logout implements Action {
+  readonly type: string = ACTIONS.LOGOUT;
+  constructor(public payload: null) {}
+}
+
+export class AutoLogin implements Action {
+  readonly type: string = ACTIONS.AUTO_LOGIN;
+  constructor(public payload: null) {}
+}
+
+export type AuthActions =
+  | LoginStart
+  | AuthenticateSuccess
+  | AuthenticateFail
+  | SignupStart
+  | ClearError
+  | Logout
+  | AutoLogin;
