@@ -13,7 +13,10 @@
           <a [routerLink]="['/shopping-list']">Shopping List</a>
         </li>
       </ul>
-      <ul class="nav navbar-nav navbar-right">
+      <ul class="nav navbar-nav navbar-right" *ngIf="isAuthenticated">
+        <li class="dropdown-item">
+          <a (click)="onLogout()">Logout</a>
+        </li>
         <li class="dropdown" appDropdown>
           <a class="dropdown-toggle" role="button">
             Manage <span class="caret"></span>
@@ -25,13 +28,6 @@
             </li>
             <li class="dropdown-item">
               <a (click)="onFetchData()">Fetch Data</a>
-            </li>
-            <hr style="margin: 5px" />
-            <li class="dropdown-item" *ngIf="!isAuthenticated">
-              <a [routerLink]="['/auth']">Authenticate</a>
-            </li>
-            <li class="dropdown-item" *ngIf="isAuthenticated">
-              <a (click)="onLogout()">Logout</a>
             </li>
           </ul>
         </li>

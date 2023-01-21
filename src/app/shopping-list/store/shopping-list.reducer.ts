@@ -30,6 +30,12 @@ export function shoppingListReducer(
         ingredients: [...state.ingredients, ...(<Ingredient[]>action.payload)],
       };
 
+    case SLActions.SET_INGREDIENTS:
+      return {
+        ...state,
+        ingredients: [...(action.payload as Ingredient[])],
+      };
+
     case SLActions.UPDATE_INGREDIENT:
       const ingredient = state.ingredients[state.editedIngredientIndex];
       const updatedIngredient = {

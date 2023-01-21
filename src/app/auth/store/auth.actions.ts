@@ -22,6 +22,7 @@ export class AuthenticateSuccess implements Action {
   userId: string;
   token: string;
   expirationDate: Date;
+  redirect: boolean;
 
   constructor(
     public payload: {
@@ -29,6 +30,7 @@ export class AuthenticateSuccess implements Action {
       userId: string;
       token: string;
       expirationDate: Date;
+      redirect: boolean;
     }
   ) {}
 }
@@ -45,24 +47,18 @@ export class SignupStart implements Action {
 
 export class ClearError implements Action {
   readonly type: string = ACTIONS.CLEAR_ERROR;
-  constructor(public payload: null) {}
 }
 
 export class Logout implements Action {
   readonly type: string = ACTIONS.LOGOUT;
-  constructor(public payload: null) {}
 }
 
 export class AutoLogin implements Action {
   readonly type: string = ACTIONS.AUTO_LOGIN;
-  constructor(public payload: null) {}
 }
 
 export type AuthActions =
   | LoginStart
   | AuthenticateSuccess
   | AuthenticateFail
-  | SignupStart
-  | ClearError
-  | Logout
-  | AutoLogin;
+  | SignupStart;

@@ -15,6 +15,8 @@ import { AuthEffects } from './auth/store/auth.effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
+import { RecipeEffects } from './recipes/store/recipe.effects';
+import { ShoppingListEffects } from './shopping-list/store/shopping-list.effects';
 
 @NgModule({
   declarations: [AppComponent, HeaderComponent],
@@ -24,8 +26,11 @@ import { StoreRouterConnectingModule } from '@ngrx/router-store';
     HttpClientModule,
     SharedModule,
     StoreModule.forRoot(fromRoot.appReducer),
-    EffectsModule.forRoot([AuthEffects]),
-    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
+    EffectsModule.forRoot([AuthEffects, RecipeEffects, ShoppingListEffects]),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25,
+      logOnly: environment.production,
+    }),
     StoreRouterConnectingModule.forRoot(),
   ],
   providers: [

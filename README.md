@@ -1026,9 +1026,14 @@
   - Install NgRX
     - `ng add @ngrx/store@latest`
   
-    - NgRX Effects
+    - NgRx Effects
       - `ng add @ngrx/effects`
 
+    - NgRx Store Devtools
+      - `ng add @ngrx/store-devtools@latest`
+
+    - NgRx Router
+      - `ng add @ngrx/router-store`
 
 #### Animations & Testing
 
