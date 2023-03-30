@@ -26,7 +26,9 @@
 |16| [Modules & Optimizations](#modules--optimizations)|
 |17| [Deployment](#deployment)|
 |18| [NgRx](#ngrx)|
-|19| [Animations & Testing](#animations--testing)|
+|19| [Animations](#animations)|
+|19| [Service Workers](#service-workers)|
+|19| [Testing](#testing)|
 |20| [Project](#project)|
 
 #### How Angular Project Starts
@@ -37,11 +39,15 @@
   `bootstrap: [AppComponent]` as argument to the `NgModule` decorator.
   - It means AppComponent should be known to Angular when it analyse the project.
 
+  **[⬆ Back to Top](#key-points-to-learn)**
+
 #### Typescript
 
   - Typescript is a superset of javascript
   - More features than vanilla JS (e.g Types, Classes, Interfaces, etc)
   - Typescript compiled to Javascript and run in browser
+
+  **[⬆ Back to Top](#key-points-to-learn)**
 
 #### Adding Bootstrap
 
@@ -62,6 +68,8 @@
     ]
   ```
 
+  **[⬆ Back to Top](#key-points-to-learn)**
+
 #### Component
 
   - Components are the key feature of Angular
@@ -75,6 +83,8 @@
   - styleUrls for refer external style sheet it takes an array of different style urls. We can use inline style using styles array.
   ex : `styles: [ h3 { color : dodgerblue } ]`
 
+  **[⬆ Back to Top](#key-points-to-learn)**
+
 #### Data Binding
 
   - Communication between view (HTML) and logic (TS).
@@ -82,6 +92,8 @@
   - Property Binding (`[propery] = "data"`)
   - Event Binding (`(event) = "expression"`)
   - Two-Way-Binding (`[(ngModel)] = "data"`)
+
+  **[⬆ Back to Top](#key-points-to-learn)**
   
 #### Directives
 
@@ -132,6 +144,8 @@
     ```
     Refer `HighlightDirective`
 
+  **[⬆ Back to Top](#key-points-to-learn)**
+
 #### Lifecycle Hooks
  
   | Hooks  | Description  |
@@ -143,6 +157,8 @@
   | `ngAfterViewInit`  | Called after the component's view (and child views) has been initialized  |
   | `ngAfterViewChecked`  | Called every time the view (and child views) have been checked  |
   | `ngOnDestroy` | Called once the component is about to be destroyed |
+
+  **[⬆ Back to Top](#key-points-to-learn)**
 
 #### Services
 
@@ -172,6 +188,8 @@
 
     // if we done this without using services, have to set emitter then bind property send value listen event alot of things to do, so use service to communicate ... 
     ```
+  
+  **[⬆ Back to Top](#key-points-to-learn)**
 
 #### Routing
 
@@ -392,6 +410,8 @@
     "localhost:4200/#/user/10?mode=edit#focus"
     ``` 
 
+  **[⬆ Back to Top](#key-points-to-learn)**
+
 #### Observables
 
   - An Observables can be called as data source. 
@@ -491,6 +511,8 @@
         this.activatedSub.unsubscribe();
       }
     ```
+  
+  **[⬆ Back to Top](#key-points-to-learn)**
 
 #### Forms
 
@@ -608,6 +630,8 @@
           <button type="submit">Submit</button>
       </form>
     ```
+  
+  **[⬆ Back to Top](#key-points-to-learn)**
 
 #### Pipes
 
@@ -655,6 +679,8 @@
     ```html
       <p>{{ getStatus() | async }}</p>
     ```
+  
+  **[⬆ Back to Top](#key-points-to-learn)**
 
 #### HTTP
 
@@ -863,6 +889,8 @@
         // here first AuthInterceptorService will work after that LoggingInterceptorService will work
         ```
 
+  **[⬆ Back to Top](#key-points-to-learn)**
+
 #### Authentication
 
   - Signup and Login with auth key
@@ -918,6 +946,8 @@
       }
     }
     ```
+
+  **[⬆ Back to Top](#key-points-to-learn)**
   
 #### Dynamic Components
 
@@ -941,6 +971,8 @@
           ]
         ...
       ```
+
+  **[⬆ Back to Top](#key-points-to-learn)**
 
 #### Modules & Optimizations
 
@@ -982,6 +1014,8 @@
       ]
     ...
     ```
+
+  **[⬆ Back to Top](#key-points-to-learn)**
   
 #### Deployment
 
@@ -1000,6 +1034,8 @@
   - Choose the project name and other options
   - `firebase deploy`
   - Hosting URL: [Recipe Book](https://angular-86654.web.app)
+
+  **[⬆ Back to Top](#key-points-to-learn)**
 
 #### NgRx
 
@@ -1035,9 +1071,189 @@
     - NgRx Router
       - `ng add @ngrx/router-store`
 
-#### Animations & Testing
+  **[⬆ Back to Top](#key-points-to-learn)**  
+  
+
+#### Animations
+
+  - `npm install --save @angular/animations`
+  - Add the BrowserAnimationsModule  to your imports[]  array in AppModule
+  - This Module needs to be imported from `@angular/platform-browser/animations`  => `import { BrowserAnimationsModule } from '@angular/platform-browser/animations`  (in the AppModule!)
+  - You then import trigger , state , style  etc from `@angular/animations`  instead of `@angular/core` ( compering with angular 4 )
+
+  ```ts
+  @component({
+    animations:[
+      // box animation
+      trigger('divAnimate', [
+        state('normal', style({
+          backgroundColor:'gray',
+          transform: 'translateX(0)',
+        })),
+        state('highlighted', style({
+          backgroundColor:'blue',
+          transform: 'translateX(100px)'
+        })),
+        //transition('normal => highlighted', animate(1000)),
+        //transition('highlighted => normal', animate(1000))
+
+        transition('normal <=> highlighted', animate(1000))
+        // from any state to shrunken use * (wildcard)
+        transition('shrunken <=> *', [
+          style({
+            backgroundColor: 'orange'
+          }),
+          animate(1000, style({
+            borderRadius: '50px'
+          })),
+          animate(500)
+        ])  
+      ]),
+
+      // list animation
+      trigger('list',[
+        state('in', style({
+          opacity: 1,
+          transform: 'translateX(0)'
+        })),
+        transition('void => *', [
+          style({
+            opacity: 0,
+            transform: 'translateX(-100px)'
+          }),
+          animate(300)
+        ]),
+        transition('* => void', [
+          animate(300, style({
+            opacity: 0,
+            transform: 'translateX(100px)'
+          }))
+        ])
+      ])
+
+      // keyframes
+      trigger('list',[
+        state('in', style({
+          opacity: 1,
+          transform: 'translateX(0)'
+        })),
+        transition('void => *', [
+          animate(1000, keyframes([
+            style({
+              transform: 'translateX(-100px)',
+              opacity:0,
+              offset:0
+            }),
+            style({
+              transform: 'translateX(-50px)',
+              opacity:0.5,
+              offset:0.3
+            }),
+            style({
+              transform: 'translateX(-20px)',
+              opacity:1,
+              offset:0.8
+            }),
+            style({
+              transform: 'translateX(0px)',
+              opacity:1,
+              offset:1
+            }),
+          ]))
+        ]),
+      ])
+
+      // group
+      transition('* => void', [
+        group([
+          animate(300, style({
+            color: 'red'
+          })),
+          animate(300, style({
+            opacity: 0,
+            transform: 'translateX(100px)'
+          }))
+        ])
+      ])
+    ]
+  })
+
+  state = "normal";
+  ```
+
+  ```html
+  <div [@divAnimate]="state" class="animDiv"></div>
+
+  <!-- animation callbacks -->
+  <div class="animDiv" 
+    [@divAnimate] = "state"
+    (@divAnimate.start) = "animationStarted($event)"
+    (@divAnimate.done) = "animationEnded($event)"
+    >
+  </div>
+  ```
+
+  **[⬆ Back to Top](#key-points-to-learn)**
+
+#### Service Workers
+  - Service worker manages all pages (js, css, font) and cached for available offline.
+  - `ng add @angular/pwa`
+  
+  ```json
+  // ngsw-config.json
+  "dataGroups": [
+    {
+      "name": "posts",
+      "urls": [
+        "https://jsonplaceholder.typicode.com/posts"
+      ],
+      "cacheConfig": [
+        "maxSize": 5,
+        "maxAge": "12h" //1d, 1h, 50m etc
+        "timeout": "10s",
+        "strategy": "freshness" // performance
+      ]
+    }
+  ]
+  ```
+
+  **[⬆ Back to Top](#key-points-to-learn)**
+
+#### Testing
+
+  - Test file => `.spec.ts`
+  
+  ```ts
+  decribe('Component: User', () => {
+    beforeEach(() => {
+      TestBed.configureTestingModule({
+        declarations: [ UserComponent ]
+      })
+    })
+
+    it('should create the app', () => {
+      let fixture = TextBed.createComponent(UserComponent);
+      let app = fixture.debugElement.componentInstance;
+      expect(app).toBeTruthy();
+    });
+
+    it('should use the user name from the service', () => {
+      let fixture = TextBed.createComponent(UserComponent);
+      let app = fixture.debugElement.componentInstance;
+      let userService = fixture.debugElement.injector.get(UserService);
+      fixture.detectChanges();
+      expect(userService.user.name).toEqual(app.user.name);
+    })
+  });
+  ```
+
+  - `ng test`
+
+  **[⬆ Back to Top](#key-points-to-learn)**
+
 
 ---
+
 ### Project
   ![image](./src/assets/planning.png)
 
