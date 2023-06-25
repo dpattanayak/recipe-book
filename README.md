@@ -98,37 +98,37 @@
 #### Directives
 
   - Directives are the Instructions in the DOM
-    1. Structural Directive
+    1. Structural Directives
     2. Attribute Directives
+    3. Custome Directives
 
-  - *ngIf is a **Structural Directive** i.e it adds or removes elemnts on the DOM so it has a * mark in it.
+  - **Structural Directives** are *ngIf, *ngFor i.e it adds or removes elemnts on the DOM so it has a * mark in it.
 
-    ```js
-    *ngIf="condition; else elseBlock"
+    ```html
+    <p *ngIf="condition; else elseBlock">...</p>
+    ```
+    - For the else block we need to declare a local reference 
+
+    ```html 
+    <ng-template #elseBlock>...</ng-template>
     ```
 
     ```html
     <p *ngFor="let data of arrayList">{{data}}</p>
     ```
 
-  - For the else block we need to declare a local reference 
-
-    ```html 
-    <ng-template #elseBlock>...</ng-template>
-    ```
-
-  - **Attribute Directives** don't add or remove elements. They only change the element.
-    ```js
-    [ngStyle]="{backgroundColor: getColor()}"
-    [ngClass]="{success: status === 'online'}"
-    ```
-
-  - Access the Index in *ngFor
+    - Access the Index in *ngFor
     ```html
     <p *ngFor="let data of arrayList; let i = index">{{data}}</p>
     ```
 
-  - Custome Directive
+  - **Attribute Directives** don't add or remove elements. They only change the element.
+    ```html
+    <p [ngStyle]="{backgroundColor: getColor()}">...</p>
+    <p [ngClass]="{success: status === 'online'}">...</p>
+    ```
+
+  - **Custome Directive**
 
     `@Directive` decorator is used for custome directive.
     ```bash
@@ -149,13 +149,14 @@
 #### Lifecycle Hooks
  
   | Hooks  | Description  |
-  |---|---|
+  |--------|--------------|
   | `ngOnChanges`  | Called after a bound input property changes  |
   |  `ngOnInit` |  Called once the component is initialized |
   | `ngDoCheck`  | Called during every change detection run  |
   |  `ngAfterContentInit` |  Called every time the projected content has been checked |
+  |`ngAfterContentChecked`| Called after Angular checks the content projected into the directive or component |
   | `ngAfterViewInit`  | Called after the component's view (and child views) has been initialized  |
-  | `ngAfterViewChecked`  | Called every time the view (and child views) have been checked  |
+  | `ngAfterViewChecked`  | Called every time the view (and child views) has been checked  |
   | `ngOnDestroy` | Called once the component is about to be destroyed |
 
   **[⬆ Back to Top](#key-points-to-learn)**
@@ -199,7 +200,7 @@
 
   - Difference between `<a href='/user'>User</a>` and `<a routerLink='/user'>User</a>` is `routerLink` prevents the default behaviour of anchor tag that tends to reload the page.
 
-  - `<a routerLink='/user'>User</a>` - we should always use '/user' which is an absolute path, if we use 'user' instead '/user' it will become a relative path which will cause error i.e \
+  - `<a routerLink='/user'>User</a>` - we should always use `/user` which is an absolute path, if we use `user` instead `/user` it will become a relative path which will cause error i.e \
   absolute path = `localhost:4200/user` \
   relative path = `localhost:4200/home/user`
   
@@ -225,7 +226,8 @@
         this.userId = this.route.snapshot.params['id'];
 
         // fetching route parameters reactively
-        // the requirement is we want to load data in the params from the same page it already loaded, so that route snapshot will not detect the changes. 
+        // the requirement is we want to load data in the params from the same  page it already loaded, 
+        // so that route snapshot will not detect the changes. 
         // so we need to use subscribe() of params which is an observable.
 
         this.paramsSubscription = this.route.params().subscribe(
@@ -385,15 +387,15 @@
 
     - Resolver - Runs before a route load to insure the data it depends is there.
 
-      ```ts
-        // recipes-resolver.service.ts
-        resolve(
-          route: ActivatedRouteSnapshot,
-          state: RouterStateSnapshot
-        ): Recipe[] | Observable<Recipe[]> | Promise<Recipe[]> {
-          return this.dataStorageService.fetchRecipes();
-        }
-      ```
+    ```ts
+      // recipes-resolver.service.ts
+      resolve(
+        route: ActivatedRouteSnapshot,
+        state: RouterStateSnapshot
+      ): Recipe[] | Observable<Recipe[]> | Promise<Recipe[]> {
+        return this.dataStorageService.fetchRecipes();
+      }
+    ```
 
   - Location Strategies
 
@@ -678,6 +680,18 @@
 
     ```html
       <p>{{ getStatus() | async }}</p>
+    ```
+
+    ```ts
+    @Component({
+      selector: 'async-observable-pipe',
+      template: '<div><code>observable|async</code>: Time: {{ time | async }}</div>'
+    })
+    export class AsyncObservablePipeComponent {
+      time = new Observable<string>((observer: Observer<string>) => {
+        setInterval(() => observer.next(new Date().toString()), 1000);
+      });
+    }
     ```
   
   **[⬆ Back to Top](#key-points-to-learn)**
